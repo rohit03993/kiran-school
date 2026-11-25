@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  color: #333333;
+  background: #ffffff;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #0f7a34;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #0f7a34;
+  outline-offset: 3px;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.stat-flip {
+  perspective: 1200px;
+}
+
+.stat-flip-inner {
+  position: relative;
+  height: 412px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.stat-flip:hover .stat-flip-inner,
+.stat-flip:focus-within .stat-flip-inner,
+.stat-flip.is-open .stat-flip-inner {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 1023px) {
+  .stat-flip-inner {
+    height: 280px;
+  }
+
+  .stat-flip.is-short .stat-flip-inner {
+    height: 168px;
+  }
+}
+
+@media (hover: none) {
+  .stat-flip:hover .stat-flip-inner {
+    transform: none;
+  }
+
+  .stat-flip.is-open .stat-flip-inner,
+  .stat-flip:focus-within .stat-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.stat-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+.stat-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  .stat-flip-inner {
+    transition: none;
+  }
+}
