@@ -8,7 +8,7 @@ function mergeSite(rows: { key: string; value: string }[]) {
     try {
       const saved = JSON.parse(row.value) as Record<string, unknown>;
       const key = row.key as SectionKey;
-      site[key] = { ...site[key], ...saved } as SiteContent[SectionKey];
+      Object.assign(site[key] as object, saved);
     } catch {
       continue;
     }
