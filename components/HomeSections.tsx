@@ -149,17 +149,20 @@ export function NetworkBand({ title, text, schools }: { title: string; text: str
         <p className="mx-auto mt-3 max-w-xl text-center text-base text-ink/70 sm:text-lg">{text}</p>
       </Container>
 
-      <div className="relative mx-auto mt-8 grid max-w-lg grid-cols-2 gap-x-8 gap-y-10 px-6 lg:hidden">
-        <svg className="pointer-events-none absolute inset-x-10 top-12 h-[58%] w-[calc(100%-5rem)]" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="18" y1="8" x2="82" y2="8" stroke="#0F7A34" strokeOpacity="0.28" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-          <line x1="18" y1="92" x2="82" y2="92" stroke="#0F7A34" strokeOpacity="0.28" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-          <line x1="18" y1="8" x2="18" y2="92" stroke="#0F7A34" strokeOpacity="0.28" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-          <line x1="82" y1="8" x2="82" y2="92" stroke="#0F7A34" strokeOpacity="0.28" strokeWidth="1.4" vectorEffect="non-scaling-stroke" />
-        </svg>
+      <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-x-4 gap-y-8 px-5 lg:hidden">
         {shown.map((school) => (
-          <div key={school.slug} className="relative z-10 pb-12">
-            <SchoolMark school={school} size={104} />
-          </div>
+          <Link
+            key={school.slug}
+            href={`/schools/${school.slug}`}
+            aria-label={`${school.name}, ${school.board}, ${school.city}`}
+            className="flex flex-col items-center text-center"
+          >
+            <span className="relative block h-32 w-32 overflow-hidden rounded-full bg-white shadow-[0_16px_32px_rgba(15,122,52,0.16)] ring-4 ring-gold">
+              <Image src={school.image} alt="" fill sizes="128px" className="object-cover" />
+            </span>
+            <span className="mt-3 text-base font-bold tracking-tight text-maroon">{school.board}</span>
+            <span className="mt-0.5 text-sm text-ink/60">{school.city}</span>
+          </Link>
         ))}
       </div>
 
@@ -199,7 +202,7 @@ export function NetworkBand({ title, text, schools }: { title: string; text: str
         })}
       </div>
 
-      <div className="mt-4 flex justify-center lg:mt-2">
+      <div className="mt-10 flex justify-center lg:mt-2">
         <OutlineLink href="/schools">Find a school</OutlineLink>
       </div>
     </section>
